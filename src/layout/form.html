@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My task</title>
+    <script src="../../dist/index.js"></script>
+    <style  type="text/css">
+        h1{
+            text-align: center;
+        }
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex-direction: row;
+        }
+        #ftask{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            margin: 0px 10px;
+        }
+        #ftask label, #ftask .inputValue{
+            margin: 5px 0px;
+            padding: 10px;
+        }
+        ul{
+            
+        }
+        li{
+            display: inline-block;
+            padding: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <header> 
+        <h1>Task creator</h1>
+    </header>
+    <main>
+        <form id="ftask" method="post">
+            <label for="nameTask">Name task</label>
+            <input type="text" id="nameTask" name="nameTask" class="inputValue" placeholder="Write new task here..." required>
+            <label for="description">Description:</label>
+            <textarea id="description" class="inputValue" name="description" rows="4" cols="50" placeholder="Dscription the new task here..."></textarea>
+            <label for="timetable">Task finish:</label>
+            <input type="date" id="timetable" class="inputValue" name="timetable" required>
+            <label for="status">Status of task:</label>
+            <select id="status" name="status" class="inputValue" required>
+                <option disabled selected value>-- Selected the status of task-- </option>
+                <option value="completed">Task finished</option>
+                <option value="incomplete">Task unfinished</option>
+                <option value="pending">not finished yet...</option>
+            </select>
+            <br>
+            <button type="button" class="btn-add">Add task</button>
+        </form>
+        <ul class="task-list">
+            
+        </ul>
+    </main>
+</body>
+</html>

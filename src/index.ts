@@ -11,6 +11,8 @@ const addTaskToList = < U extends HTMLElement & { value: string}>(): void => {
       btnAdd.addEventListener("click", (event: Event) => {
         event.preventDefault();
         const values: string[] = getFormValue();
+        const objTask: Task<string> = createTask<string>(values);
+
   
       });
     }
@@ -21,7 +23,12 @@ const getFormValue = <U extends HTMLElement & { value: string} >(): string[] =>{
     return nodeElements.map(e => e.value);
 }
 
-  const init = () => {
+const createTask = <T>(datas: T[]): Task<T> => {
+  let newTask = new Task<T>(datas[0] ,datas[1], datas[2], datas[3]); 
+  return newTask;
+}; 
+
+const init = () => {
     addTaskToList();
 }
 

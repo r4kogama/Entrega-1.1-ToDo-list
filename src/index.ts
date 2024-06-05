@@ -10,10 +10,16 @@ const addTaskToList = < U extends HTMLElement & { value: string}>(): void => {
     if (btnAdd !== null) {
       btnAdd.addEventListener("click", (event: Event) => {
         event.preventDefault();
-
+        const values: string[] = getFormValue();
+  
       });
     }
   };
+
+const getFormValue = <U extends HTMLElement & { value: string} >(): string[] =>{
+    const nodeElements = Array.from(document.querySelectorAll(".inputValue")) as U[]; 
+    return nodeElements.map(e => e.value);
+}
 
   const init = () => {
     addTaskToList();

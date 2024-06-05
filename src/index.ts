@@ -12,8 +12,8 @@ const addTaskToList = < U extends HTMLElement & { value: string}>(): void => {
         event.preventDefault();
         const values: string[] = getFormValue();
         const objTask: Task<string> = createTask<string>(values);
-
-  
+        objTask.addTask(objTask);
+        taskList(objTask);
       });
     }
   };
@@ -27,6 +27,23 @@ const createTask = <T>(datas: T[]): Task<T> => {
   let newTask = new Task<T>(datas[0] ,datas[1], datas[2], datas[3]); 
   return newTask;
 }; 
+
+const taskList = <T>(obj:Task<T>):void =>{
+  const list = document.querySelector(".task-list") as HTMLUListElement;
+  if(!list) return;
+  let liNodes= '' as string;
+  obj.tasks.forEach((e :Note<T>, i: number) => {
+     liNodes += 
+     `<li class="info">
+          <span>${i as number}</span>
+          <p>${e.name as string}</p>
+          <p>${e.description as string}</p>
+          <p>${e.timetable as string}</p>
+          <p>${e.state as string}</p>
+      </li>`;
+  });
+  list.innerHTML = liNodes;
+}
 
 const init = () => {
     addTaskToList();

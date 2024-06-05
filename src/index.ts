@@ -5,6 +5,7 @@ import { Task } from "./shared/model/task";
 
 
 
+
 const addTaskToList = < U extends HTMLElement & { value: string}>(): void => {
     const btnAdd = document.querySelector(".btn-add") as U | null;
     if (btnAdd !== null) {

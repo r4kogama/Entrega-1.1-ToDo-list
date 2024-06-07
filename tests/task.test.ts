@@ -11,7 +11,7 @@ beforeEach(() => {
 
 
 describe('CRUD test de tarea sin el control del formulario',()=>{
-    test('Añade la tarea a la lista de tareas', () =>{
+    test('Añade la tarea a la lista de tareas, si es superior a 0', () =>{
         newTask.addTask(newTask);
         expect(newTask.tasks.length).toBeGreaterThan(0);
     });
@@ -23,13 +23,21 @@ describe('CRUD test de tarea sin el control del formulario',()=>{
         expect(getTask?.name).toContain(objtask.name);
     }); 
 
-    test('Actualizar el estado de la tarea', ()=>{
+    test('Actualizar el estado de la tarea a NewStatus', ()=>{
         const objtask = { status: 'NewStatus' };
         newTask.updateStatus(newTask, objtask.status);
         expect(newTask.state).toEqual('NewStatus');
      });
 
-    test('Elimina la tarea de la lista de tareas', () =>{
+     test ('Crear 3 tareas y listarlas de manera visualmente', () => {
+        for( let i = 0; i < 3; i++){
+            newTask.addTask(newTask);
+        }
+        console.log(newTask.tasks);
+        expect(newTask.tasks.length).toBe(3);
+     });
+
+    test('Elimina la tarea creada de la lista de tareas', () =>{
         const objtask = { name: 'Title' };
         newTask.addTask(newTask);
         newTask.removeTask(newTask);
@@ -41,5 +49,7 @@ describe('CRUD test de tarea sin el control del formulario',()=>{
         const getTask = newTask.searchTask(newTask);
         expect(getTask).toBeUndefined();
     });  
+
+  
 })
 

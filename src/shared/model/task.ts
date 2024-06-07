@@ -17,7 +17,10 @@ export class Task <T>  implements Note <T> {
         this.state = status ?? undefined;
     }
     
-   
+   //factory method
+     static createInstanceNewObject<T>( name?: T, description?: T, timetable?: T, status?: T): Task<T> {
+        return new Task<T>(name, description, timetable, status);
+    }
     
     addTask(task:Note<T>): void {
         this.tasks.push(task);

@@ -3,6 +3,13 @@ import { Task } from "./shared/model/task";
 import { TaskStatus as Status } from "./shared/model/taskStatus";
 
 
+let intanceObj: Task<any> ;
+
+const createTask = <T>(datas: T[] | undefined): Task<T> => {
+  if(datas === undefined) throw new Error("datas is undefined");
+  intanceObj = Task.createInstanceNewObject<T>(datas[0], datas[1], datas[2], datas[3]);
+  return intanceObj;
+};
 
 
 const addTaskToList = <U extends HTMLElement & { value: string }>(): void => {

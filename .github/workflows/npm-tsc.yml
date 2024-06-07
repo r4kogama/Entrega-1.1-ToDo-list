@@ -24,5 +24,4 @@ jobs:
     - name: Exit on Test Failure
       run: exit 1
       if: failure()
-    - name: If the test is correct, it automates git commit
-      uses: actions4git/add-commit-push
+

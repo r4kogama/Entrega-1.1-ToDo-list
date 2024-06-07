@@ -2,7 +2,7 @@ import { Note } from "./shared/model/note";
 import { Task } from "./shared/model/task";
 import { TaskStatus as Status } from "./shared/model/taskStatus";
 
-
+// create factory method
 let intanceObj: Task<any> ;
 
 const createTask = <T>(datas: T[] | undefined): Task<T> => {
@@ -11,6 +11,7 @@ const createTask = <T>(datas: T[] | undefined): Task<T> => {
   return intanceObj;
 };
 
+//access to the methods of the class
 
 const addTaskToList = <U extends HTMLElement & { value: string }>(): void => {
   const btnAdd = document.querySelector(".btn-add") as U | null;
@@ -25,6 +26,36 @@ const addTaskToList = <U extends HTMLElement & { value: string }>(): void => {
   }
 };
 
+const updateStateOfTask = <T>(task : Note<T>) =>{
+  const newStatus = document.querySelector('.changeStatus') as HTMLSelectElement;
+  let stateValue = newStatus.value as T;
+  let foundTask: Note<T> | undefined = getTaskFound(task);
+
+  intanceObj.updateStatus(foundTask, stateValue);
+}
+
+
+const removeTaskOfList = <T>(task : Note<T>, index: number):void =>{
+  try{
+    const span = document.querySelector(`.list-${index}`) as HTMLSpanElement;
+    let elementLi = span.closest('li') as HTMLLIElement;
+    elementLi?.remove();
+    let foundTask: Note<T> | undefined = getTaskFound(task);
+    intanceObj.removeTask(foundTask);
+  }catch(e){
+    console.error('Error: ', (e as Error).message);
+  }
+   
+}
+
+const getTaskFound = <T>(task : Note<T>): Note<T> | undefined =>{
+  let catchTask: Note<T> | undefined = intanceObj.searchTask(task);
+  return catchTask;
+}
+
+
+
+//data form
 const getFormValue = <U extends HTMLElement & { value: string }>(): string[]=> {
   try{
     const nodeElements = Array.from(document.querySelectorAll(".inputValue")) as U[];
@@ -45,7 +76,7 @@ const getFormValue = <U extends HTMLElement & { value: string }>(): string[]=> {
   }
 }
 
-
+// create list of task
 const createTaskList = <T>(obj: Task<T>): void => {
   const list = document.querySelector(".task-list") as  HTMLUListElement | null;
   if (!list) return;
@@ -68,31 +99,12 @@ const createTaskList = <T>(obj: Task<T>): void => {
       </li>`;
   });
   list.innerHTML = liNodes;
-}
-
-const getTaskFound = <T>(task : Note<T>): Note<T> | undefined =>{
-  let catchTask: Note<T> | undefined = intanceObj.searchTask(task);
-  return catchTask;
-}
+};
 
 
-
-const removeTaskOfList = <T>(task : Note<T>, index: number):void =>{
-  try{
-    const span = document.querySelector(`.list-${index}`) as HTMLSpanElement;
-    let elementLi = span.closest('li') as HTMLLIElement;
-    elementLi?.remove();
-    let foundTask: Note<T> | undefined = getTaskFound(task);
-    intanceObj.removeTask(foundTask);
-  }catch(e){
-    console.error('Error: ', (e as Error).message);
-  }
-   
-}
-
-const init = () => {
+const init = (): void => {
   addTaskToList();
-}
+};
 
 
 window.addEventListener("load", init);

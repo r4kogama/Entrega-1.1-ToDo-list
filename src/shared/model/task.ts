@@ -40,6 +40,10 @@ export class Task <T>  implements Note <T> {
         this.tasks.splice(indexTask, 1);
     }
 
-   
+    updateStatus<T>(task: Note<T> | undefined, updateState : T ): void {
+        if(task === undefined) throw new Error("Error data update undefined");
+        if(updateState === undefined) throw new Error("Error no se ha podido actualizar el estado");
+        task.state = updateState;
+    }    
     
 }

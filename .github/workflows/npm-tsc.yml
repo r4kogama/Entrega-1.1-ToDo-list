@@ -10,11 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: install node v20
+    - name: install node
       uses: actions/setup-node@v1
       with:
-        node-version: 20
-    - name: npm install
+        node-version: 'lts/*'
+    - name: install Dependencies
       run: npm install
-    - name: tsc
+    - name: Execute test
+      run: npm run test 
+    - name: compilation Typescript
       uses: icrawl/action-tsc@v1
+      if: success() 
+    - name: Exit on Test Failure
+      run: exit 1
+      if: failure()
+    - name: If the test is correct, it automates git commit
+      uses: actions4git/add-commit-push

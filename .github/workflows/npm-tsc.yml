@@ -13,7 +13,7 @@ jobs:
     - name: install node
       uses: actions/setup-node@v1
       with:
-        node-version: 'lts/*'
+        node-version: 20
     - name: install Dependencies
       run: npm install
     - name: Execute test
